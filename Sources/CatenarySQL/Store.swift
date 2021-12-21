@@ -45,7 +45,10 @@ public extension Store where Mode == ReadWrite {
 	func delete<Model>(_ delete: Delete<Model>) async {
 		await self.delete(delete).publisher().singleValue
 	}
+}
 
+// MARK: -
+extension Store where Mode == ReadWrite {
 	static func open(for types: [AnyModel.Type]) async throws -> Store {
 		try await Store<ReadWrite>
 			.open(libraryNamed: .database, for: types)
@@ -53,7 +56,7 @@ public extension Store where Mode == ReadWrite {
 			.singleValue
 	}
 
-	static func clear() throws {
+	static func destroy() throws {
 		try FileManager.default.removeItem(at: url)
 	}
 }
