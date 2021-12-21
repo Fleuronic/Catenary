@@ -46,21 +46,21 @@ public extension Store where Mode == ReadWrite {
 		await self.delete(delete).publisher().singleValue
 	}
 
-	func clear() throws {
-		try FileManager.default.removeItem(at: url)
-	}
-
 	static func open(for types: [AnyModel.Type]) async throws -> Store {
 		try await Store<ReadWrite>
 			.open(libraryNamed: .database, for: types)
 			.publisher()
 			.singleValue
 	}
+
+	static func clear() throws {
+		try FileManager.default.removeItem(at: url)
+	}
 }
 
 // MARK: -
 private extension Store {
-	var url: URL {
+	static var url: URL {
 		get throws {
 			try FileManager.default
 				.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
