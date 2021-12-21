@@ -26,7 +26,7 @@ let package = Package(
 		)
 	],
 	dependencies: [
-		.package(url: "https://github.com/vapor/postgres-kit", .branch("main")),
+		.package(url: "https://github.com/vapor/postgres-kit", .upToNextMajor(from: "2.5.0")),
 		.package(url: "https://github.com/PersistX/PersistDB", .branch("master")),
 		.package(url: "https://github.com/Fleuronic/AsyncExtensions", .upToNextMajor(from: "0.2.1")),
 		.package(url: "https://github.com/simba909/ReactiveCombineBridge", .branch("master"))
