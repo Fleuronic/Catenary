@@ -4,6 +4,6 @@ import PersistDB
 
 public protocol Database {
 	init() async throws
-	
-	func clear() async throws
+
+	mutating func clear() async throws
 }
