@@ -2,11 +2,8 @@
 
 import PersistDB
 
-public protocol Database {}
-
-// MARK: -
-public extension Database {
-	static func clear() throws {
-		try Store<ReadWrite>.destroy()
-	}
+public protocol Database {
+	init() async throws
+	
+	func clear() async throws
 }

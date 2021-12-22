@@ -52,10 +52,7 @@ public extension Store where Mode == ReadWrite {
 			.publisher()
 			.singleValue
 	}
-}
 
-// MARK: -
-extension Store where Mode == ReadWrite {
 	static func destroy() throws {
 		try FileManager.default.removeItem(at: url)
 	}
