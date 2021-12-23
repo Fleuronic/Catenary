@@ -10,19 +10,12 @@ public protocol Database {
 
 // MARK: -
 public extension Database {
-	func createStore() async throws -> Store<ReadWrite> {
-		try await .open(for: types)
+	static func createStore() async throws -> Store<ReadWrite> {
+		try await open(for: types)
 	}
 
 	mutating func clear() async throws {
-		try Store<ReadWrite>.destroy()
-		try await updateStore()
-	}
-}
-
-// MARK: -
-private extension Database {
-	mutating func updateStore() async throws {
+		try Store.destroy()
 		self[keyPath: storeKeyPath] = try await createStore()
 	}
 }
