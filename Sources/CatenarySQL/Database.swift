@@ -4,7 +4,9 @@ import Schemata
 import PersistDB
 
 public protocol Database {
-	var storeKeyPath: WritableKeyPath<Self, Store<ReadWrite>> { get }
+	typealias StoreKeyPath = WritableKeyPath<Self, Store<ReadWrite>>
+
+	var storeKeyPath: StoreKeyPath { get }
 
 	static var types: [AnyModel.Type] { get }
 }
