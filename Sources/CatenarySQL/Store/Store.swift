@@ -39,11 +39,15 @@ public extension Store where Mode == ReadWrite {
 	}
 
 	func update<Model>(_ update: Update<Model>) async {
-		await self.update(update).publisher().completion
+		await self.update(update)
+			.publisher()
+			.completion
 	}
 
 	func delete<Model>(_ delete: Delete<Model>) async {
-		await self.delete(delete).publisher().completion
+		await self.delete(delete)
+			.publisher()
+			.completion
 	}
 
 	static func open(for types: [AnyModel.Type]) async throws -> Store {
