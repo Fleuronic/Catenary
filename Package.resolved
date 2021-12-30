@@ -30,10 +30,10 @@
       },
       {
         "package": "PersistDB",
-        "repositoryURL": "https://github.com/PersistX/PersistDB",
+        "repositoryURL": "https://github.com/Fleuronic/PersistDB",
         "state": {
           "branch": "master",
-          "revision": "af72b29851fc07d182903c52f5b95daf8f699849",
+          "revision": "09680eb11c3694e7c8bcdfd371b47db5633b9939",
           "version": null
         }
       },
