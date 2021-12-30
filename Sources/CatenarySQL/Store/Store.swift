@@ -34,8 +34,11 @@ public extension Store {
 }
 
 public extension Store where Mode == ReadWrite {
-	func insert<Model>(_ insert: Insert<Model>) async -> Model.ID {
-		await self.insert(insert).publisher().singleValue
+	func insert<Model>(_ insert: Insert<Model>) async {
+		await self.insert(insert)
+			.publisher()
+			.ignoreOutput()
+			.completion
 	}
 
 	func update<Model>(_ update: Update<Model>) async {
