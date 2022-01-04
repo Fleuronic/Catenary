@@ -34,21 +34,21 @@ public extension Store {
 }
 
 public extension Store where Mode == ReadWrite {
-	func insert<Model>(_ insert: Insert<Model>) async {
-		await self.insert(insert)
+	func insert<Model: CatenarySQL.Model>(_ model: Model) async {
+		await insert(.init(model.identifiedValueSet))
 			.publisher()
 			.ignoreOutput()
 			.completion
 	}
 
-	func update<Model>(_ update: Update<Model>) async {
-		await self.update(update)
+	func update<Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
+		await update(.init(predicate: \Model.id == id, valueSet: valueSet))
 			.publisher()
 			.completion
 	}
 
-	func delete<Model>(_ delete: Delete<Model>) async {
-		await self.delete(delete)
+	func delete<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID) async {
+		await delete(.init(\Model.id == id))
 			.publisher()
 			.completion
 	}
