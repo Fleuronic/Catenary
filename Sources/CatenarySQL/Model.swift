@@ -14,3 +14,10 @@ extension Model {
 		valueSet.update(with: [\.id == id])
 	}
 }
+
+// MARK: -
+public extension Model {
+	static var defaultOrder: [Ordering<Self>] {
+		[.init(\.id, ascending: true)]
+	}
+}
