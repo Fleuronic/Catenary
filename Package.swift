@@ -28,6 +28,7 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/vapor/postgres-kit", .upToNextMajor(from: "2.5.0")),
 		.package(url: "https://github.com/Fleuronic/PersistDB", .branch("master")),
+		.package(url: "https://github.com/JohnSundell/Identity", from: "0.1.0"),
 		.package(url: "https://github.com/Fleuronic/AsyncExtensions", .upToNextMajor(from: "0.2.1")),
 		.package(url: "https://github.com/simba909/ReactiveCombineBridge", .branch("master"))
 	],
@@ -51,6 +52,7 @@ let package = Package(
 			dependencies: [
 				"Catenary",
 				"PersistDB",
+				"Identity",
 				"AsyncExtensions",
 				"ReactiveCombineBridge"
 			]

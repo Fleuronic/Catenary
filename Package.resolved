@@ -29,11 +29,20 @@
         }
       },
       {
+        "package": "Identity",
+        "repositoryURL": "https://github.com/JohnSundell/Identity",
+        "state": {
+          "branch": null,
+          "revision": "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
+          "version": "0.3.0"
+        }
+      },
+      {
         "package": "PersistDB",
         "repositoryURL": "https://github.com/Fleuronic/PersistDB",
         "state": {
           "branch": "master",
-          "revision": "09680eb11c3694e7c8bcdfd371b47db5633b9939",
+          "revision": "1310f2f91e662fa4baa0809af1d0a6321a44b301",
           "version": null
         }
       },
@@ -75,11 +84,11 @@
       },
       {
         "package": "Schemata",
-        "repositoryURL": "https://github.com/PersistX/Schemata.git",
+        "repositoryURL": "https://github.com/Fleuronic/Schemata.git",
         "state": {
-          "branch": null,
-          "revision": "3c342170cd0afbba797f834fed89f0b8b4e1622c",
-          "version": "0.3.4"
+          "branch": "master",
+          "revision": "94be5d43b06bb84f9cc6c52e4319d91498b1ccad",
+          "version": null
         }
       },
       {
