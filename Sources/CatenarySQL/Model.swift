@@ -5,8 +5,6 @@ import PersistDB
 
 public protocol Model: PersistDB.Model, PersistDB.ModelProjection {
 	var valueSet: ValueSet<Model> { get }
-
-	static func predicate(for id: ID) -> Predicate<Self>
 }
 
 // MARK: -

@@ -7,11 +7,11 @@ extension TestStore: ReadWriteStore {
 		let _: Model = insert(.init(model.identifiedValueSet))
 	}
 
-	public func update<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
-		update(.init(predicate: Model.predicate(for: id), valueSet: valueSet))
+	public func update<Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
+		update(.init(predicate: \Model.id == id, valueSet: valueSet))
 	}
 
 	public func delete<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID) async {
-		delete(.init(Model.predicate(for: id)))
+		delete(.init(\Model.id == id))
 	}
 }
