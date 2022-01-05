@@ -8,18 +8,6 @@ import Schemata
 import PersistDB
 
 public extension Store {
-	func fetch<Projection: PersistDB.ModelProjection>(_ id: Projection.Model.ID) async -> Projection? {
-		await fetch(id).publisher().singleValue
-	}
-
-	func fetch<Key, Projection: PersistDB.ModelProjection>(_ query: Query<Key, Projection.Model>) async -> ResultSet<Key, Projection> {
-		await fetch(query).publisher().singleValue
-	}
-
-	func fetch<Model, Value>(_ aggregate: Aggregate<Model, Value>) async -> Value {
-		await observe(aggregate).publisher().singleValue
-	}
-
 	func observe<Projection: PersistDB.ModelProjection>(_ id: Projection.Model.ID) -> AnyPublisher<Projection?, Never> {
 		observe(id).publisher().eraseToAnyPublisher()
 	}
@@ -53,6 +41,13 @@ extension Store: ReadWriteStore where Mode == ReadWrite {
 			.publisher()
 			.ignoreOutput()
 			.completion
+	}
+
+	public func fetch<Projection: PersistDB.ModelProjection>(_ query: Query<None, Projection.Model>) async -> [Projection] {
+		await fetch(query)
+			.publisher()
+			.singleValue
+			.values
 	}
 
 	public func update<Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
