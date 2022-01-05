@@ -22,6 +22,10 @@ public extension Model {
 		\.id ~ "id"
 	}
 
+	static var idKeyPath: KeyPath<Self, Model.ID> {
+		\.id
+	}
+
 	static var defaultOrder: [Ordering<Self>] {
 		[.init(\Self.id, ascending: true)]
 	}
