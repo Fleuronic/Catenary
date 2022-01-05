@@ -3,9 +3,7 @@
 import Schemata
 import PersistDB
 
-public protocol Model: PersistDB.Model, PersistDB.ModelProjection {
-	var valueSet: ValueSet<Model> { get }
-}
+public protocol Model: PersistDB.Model, Valued {}
 
 // MARK: -
 extension Model {
