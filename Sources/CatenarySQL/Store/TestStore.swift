@@ -3,8 +3,8 @@
 import PersistDB
 
 extension TestStore: ReadWriteStore {
-	public func insert<Model: CatenarySQL.Model>(_ model: Model) async {
-		let _: Model = insert(.init(model.identifiedValueSet))
+	public func insert<Model: CatenarySQL.Model>(_ model: Model) async where Model == Model.Model {
+		insert(.init(model.identifiedValueSet))
 	}
 
 	public func update<Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {

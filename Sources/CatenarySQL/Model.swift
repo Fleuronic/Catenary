@@ -3,10 +3,10 @@
 import Schemata
 import PersistDB
 
-public protocol Model: PersistDB.Model, PersistDB.ModelProjection, Valued {}
+public protocol Model: PersistDB.Model, Valued {}
 
 // MARK: -
-extension Model {
+extension Model where Model == Self {
 	var identifiedValueSet: ValueSet<Model> {
 		valueSet.update(with: [\.id == id])
 	}

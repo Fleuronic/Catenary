@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/Fleuronic/PersistDB",
         "state": {
           "branch": "master",
-          "revision": "1310f2f91e662fa4baa0809af1d0a6321a44b301",
+          "revision": "36c05cf71a666eac13bdc6b1cc16d87678405a63",
           "version": null
         }
       },
@@ -87,7 +87,7 @@
         "repositoryURL": "https://github.com/Fleuronic/Schemata.git",
         "state": {
           "branch": "master",
-          "revision": "94be5d43b06bb84f9cc6c52e4319d91498b1ccad",
+          "revision": "3c342170cd0afbba797f834fed89f0b8b4e1622c",
           "version": null
         }
       },

@@ -36,7 +36,7 @@ public extension Store where Mode == ReadWrite {
 
 // MARK: -
 extension Store: ReadWriteStore where Mode == ReadWrite {
-	public func insert<Model: CatenarySQL.Model>(_ model: Model) async {
+	public func insert<Model: CatenarySQL.Model>(_ model: Model) async where Model == Model.Model {
 		await insert(.init(model.identifiedValueSet))
 			.publisher()
 			.ignoreOutput()
