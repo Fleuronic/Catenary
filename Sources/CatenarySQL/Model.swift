@@ -27,6 +27,6 @@ public extension Model {
 	}
 
 	static var defaultOrder: [Ordering<Self>] {
-		[.init(\Self.id, ascending: true)]
+		[.init(idKeyPath, ascending: true)]
 	}
 }
