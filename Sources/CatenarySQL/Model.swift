@@ -19,10 +19,10 @@ extension Model {
 // MARK: -
 public extension Model {
 	static var idProperty: Property<Self, ID> {
-		\.id ~ "id"
+		idKeyPath ~ "id"
 	}
 
-	static var idKeyPath: KeyPath<Self, Model.ID> {
+	static var idKeyPath: KeyPath<Self, ID> {
 		\.id
 	}
 
