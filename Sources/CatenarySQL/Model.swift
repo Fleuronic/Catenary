@@ -1,11 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import PersistDB
-import Identity
 
-public protocol Model: PersistDB.Model, PersistDB.ModelProjection, Identifiable {
+public protocol Model: PersistDB.Model, PersistDB.ModelProjection {
 	var valueSet: ValueSet<Model> { get }
-	var identifiedValueSet: ValueSet<Model> { get }
 }
 
 // MARK: -
@@ -18,6 +16,6 @@ extension Model {
 // MARK: -
 public extension Model {
 	static var defaultOrder: [Ordering<Self>] {
-		[.init(\.id, ascending: true)]
+		[.init(\Self.id, ascending: true)]
 	}
 }
