@@ -2,6 +2,8 @@
 
 import PersistDB
 
-public protocol Valued: PersistDB.ModelProjection {
+public protocol Valued {
+	associatedtype Model: PersistDB.Model
+
 	var valueSet: ValueSet<Model> { get }
 }
