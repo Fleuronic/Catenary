@@ -4,9 +4,7 @@ import Schemata
 import PersistDB
 
 public protocol Database {
-	typealias StoreKeyPath = WritableKeyPath<Self, Store<ReadWrite>>
-
-	var storeKeyPath: StoreKeyPath { get }
+	var store: Store<ReadWrite> { get set }
 
 	static var types: [AnyModel.Type] { get }
 }
@@ -15,7 +13,7 @@ public protocol Database {
 public extension Database {
 	mutating func clear() async throws {
 		try Store.destroy()
-		self[keyPath: storeKeyPath] = try await Self.createStore()
+		store = try await Self.createStore()
 	}
 
 	static func createStore() async throws -> Store<ReadWrite> {
