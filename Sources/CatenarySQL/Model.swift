@@ -4,9 +4,9 @@ import Schemata
 import PersistDB
 
 public protocol Model: PersistDB.Model, PersistDB.ModelProjection {
-	static var identity: Predicate<Self> { get }
-	
 	var valueSet: ValueSet<Model> { get }
+
+	static func predicate(for id: ID) -> Predicate<Self>
 }
 
 // MARK: -

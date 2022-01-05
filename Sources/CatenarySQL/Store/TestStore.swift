@@ -8,10 +8,10 @@ extension TestStore: ReadWriteStore {
 	}
 
 	public func update<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
-		update(.init(predicate: Model.identity, valueSet: valueSet))
+		update(.init(predicate: Model.predicate(for: id), valueSet: valueSet))
 	}
 
 	public func delete<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID) async {
-		delete(.init(Model.identity))
+		delete(.init(Model.predicate(for: id)))
 	}
 }

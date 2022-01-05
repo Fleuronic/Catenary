@@ -51,13 +51,13 @@ extension Store: ReadWriteStore where Mode == ReadWrite {
 	}
 
 	public func update<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
-		await update(.init(predicate: Model.identity, valueSet: valueSet))
+		await update(.init(predicate: Model.predicate(for: id), valueSet: valueSet))
 			.publisher()
 			.completion
 	}
 
 	public func delete<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID) async {
-		await delete(.init(Model.identity))
+		await delete(.init(Model.predicate(for: id)))
 			.publisher()
 			.completion
 	}
