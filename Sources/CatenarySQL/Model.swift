@@ -4,6 +4,8 @@ import Schemata
 import PersistDB
 
 public protocol Model: PersistDB.Model, PersistDB.ModelProjection {
+	static var identity: Predicate<Self> { get }
+	
 	var valueSet: ValueSet<Model> { get }
 }
 
@@ -16,12 +18,8 @@ extension Model {
 
 // MARK: -
 public extension Model {
-	static var idProperty: Property<Self, Model.ID> {
+	static var idProperty: Property<Self, ID> {
 		\.id ~ "id"
-	}
-
-	static var idKeyPath: KeyPath<Self, Model.ID> {
-		\.id
 	}
 
 	static var defaultOrder: [Ordering<Self>] {
