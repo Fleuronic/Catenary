@@ -34,25 +34,6 @@ public extension Store {
 }
 
 public extension Store where Mode == ReadWrite {
-	func insert<Model: CatenarySQL.Model>(_ model: Model) async {
-		await insert(.init(model.identifiedValueSet))
-			.publisher()
-			.ignoreOutput()
-			.completion
-	}
-
-	func update<Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
-		await update(.init(predicate: \Model.id == id, valueSet: valueSet))
-			.publisher()
-			.completion
-	}
-
-	func delete<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID) async {
-		await delete(.init(\Model.id == id))
-			.publisher()
-			.completion
-	}
-
 	static func open(for types: [AnyModel.Type]) async throws -> Store {
 		try await Store<ReadWrite>
 			.open(libraryNamed: .database, for: types)
@@ -62,6 +43,28 @@ public extension Store where Mode == ReadWrite {
 
 	static func destroy() throws {
 		try FileManager.default.removeItem(at: url)
+	}
+}
+
+// MARK: -
+extension Store: ReadWriteStore where Mode == ReadWrite {
+	public func insert<Model: CatenarySQL.Model>(_ model: Model) async {
+		await insert(.init(model.identifiedValueSet))
+			.publisher()
+			.ignoreOutput()
+			.completion
+	}
+
+	public func update<Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
+		await update(.init(predicate: \Model.id == id, valueSet: valueSet))
+			.publisher()
+			.completion
+	}
+
+	public func delete<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID) async {
+		await delete(.init(\Model.id == id))
+			.publisher()
+			.completion
 	}
 }
 

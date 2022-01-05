@@ -2,16 +2,16 @@
 
 import PersistDB
 
-public extension TestStore {
-	func insert<Model: CatenarySQL.Model>(_ model: Model) {
+extension TestStore: ReadWriteStore {
+	public func insert<Model: CatenarySQL.Model>(_ model: Model) async {
 		let _: Model = insert(.init(model.identifiedValueSet))
 	}
 
-	func update<Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) {
+	public func update<Model>(_ model: Model.Type, with id: Model.ID, using valueSet: ValueSet<Model>) async {
 		update(.init(predicate: \Model.id == id, valueSet: valueSet))
 	}
 
-	func delete<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID) {
+	public func delete<Model: CatenarySQL.Model>(_ model: Model.Type, with id: Model.ID) async {
 		delete(.init(\Model.id == id))
 	}
 }
