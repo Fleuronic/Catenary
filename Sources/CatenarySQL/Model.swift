@@ -16,12 +16,12 @@ extension Model {
 
 // MARK: -
 public extension Model {
-	static var idKeyPath: KeyPath<Self, ID> {
-		\.id
-	}
-
 	static var idProperty: Property<Self, ID> {
 		\.id ~ "id"
+	}
+
+	static var idKeyPath: KeyPath<Self, Model.ID> {
+		\.id
 	}
 
 	static var defaultOrder: [Ordering<Self>] {
