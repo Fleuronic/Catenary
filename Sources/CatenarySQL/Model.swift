@@ -3,9 +3,9 @@
 import PersistDB
 import Identity
 
-public protocol Model: PersistDB.Model, PersistDB.ModelProjection, Identifiable where ID == Identifier<Self> {
-	var id: ID { get }
+public protocol Model: PersistDB.Model, PersistDB.ModelProjection, Identifiable {
 	var valueSet: ValueSet<Model> { get }
+	var identifiedValueSet: ValueSet<Model> { get }
 }
 
 // MARK: -
