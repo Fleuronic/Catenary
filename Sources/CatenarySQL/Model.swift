@@ -16,7 +16,7 @@ extension Model {
 
 // MARK: -
 public extension Model {
-	static var idProperty: Property<Self, ID> {
+	static var idProperty: Property<Self, Model.ID> {
 		\.id ~ "id"
 	}
 
