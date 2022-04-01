@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "AsyncExtensions",
-        "repositoryURL": "https://github.com/Fleuronic/AsyncExtensions",
-        "state": {
-          "branch": null,
-          "revision": "7c17b36106b1121ebe71d3d1f5cdfdbb80e69cbf",
-          "version": "0.3.1"
-        }
-      },
-      {
         "package": "Differ",
         "repositoryURL": "https://github.com/tonyarnold/Differ.git",
         "state": {
