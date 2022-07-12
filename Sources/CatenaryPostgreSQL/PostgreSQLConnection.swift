@@ -13,7 +13,6 @@ public extension PostgreSQLConnection {
 	init(
 		hostName: String,
 		username: String,
-		password: String,
 		database: String
 	) {
 		eventLoopGroup = .init(numberOfThreads: 1)
@@ -22,9 +21,7 @@ public extension PostgreSQLConnection {
 				configuration:  .init(
 					hostname: hostName,
 					username: username,
-					password: password,
-					database: database,
-					tlsConfiguration: .makeClientConfiguration()
+					database: database
 				)
 			),
 			on: eventLoopGroup

@@ -41,6 +41,7 @@ let package = Package(
 			name: "CatenaryPostgreSQL",
 			dependencies: [
 				"Catenary",
+				"Identity",
 				.product(
 					name: "PostgresKit",
 					package: "postgres-kit"
