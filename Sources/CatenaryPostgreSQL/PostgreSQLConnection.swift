@@ -13,15 +13,21 @@ public extension PostgreSQLConnection {
 	init(
 		hostName: String,
 		username: String,
+		password: String,
 		database: String
 	) {
+		var configuration = TLSConfiguration.clientDefault
+		configuration.certificateVerification = .none
+
 		eventLoopGroup = .init(numberOfThreads: 1)
 		pool = .init(
 			source: .init(
 				configuration:  .init(
 					hostname: hostName,
 					username: username,
-					database: database
+					password: password,
+					database: database,
+					tlsConfiguration: configuration
 				)
 			),
 			on: eventLoopGroup
