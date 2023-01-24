@@ -14,6 +14,13 @@ public protocol GraphQLAPI: API where Response == GraphQL.Response, Error == Gra
 
 // MARK: -
 public extension GraphQLAPI {
+	func query<Fields: Catena.Fields & Decodable>(_ fields: Fields.Type, where predicate: Predicate<Fields.Model>) async -> Result<[Fields]> {
+		await query(.query(Fields.Model.all.filter(predicate)))
+	}
+}
+
+// MARK: -
+private extension GraphQLAPI {
 	func query<Fields: Catena.Fields & Decodable>(_ query: GraphQL.Query<Fields>) async -> Result<[Fields]> {
 		do {
 			let encoder = JSONEncoder()
@@ -34,13 +41,6 @@ public extension GraphQLAPI {
 		}
 	}
 
-	func query<Fields: Catena.Fields & Decodable>(where predicate: Predicate<Fields.Model>) async -> Result<[Fields]> {
-		await query(.query(Fields.Model.all.filter(predicate)))
-	}
-}
-
-// MARK: -
-private extension GraphQLAPI {
 	func resource<Fields: Decodable>(from data: Data) throws -> [Fields] {
 		do {
 			let resource: GraphQL.Response.Data<Fields> = try decoder.decode(Response.self, from: data).resource()

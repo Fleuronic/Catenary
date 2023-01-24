@@ -22,14 +22,3 @@ extension GraphQL.Query: CustomStringConvertible {
 		}
 	}
 }
-
-// MARK: -
-public extension PersistDB.Query {
-	var key: String {
-		"where"
-	}
-
-	var valueString: String {
-		predicates.first?.valueString ?? "{}"
-	}
-}

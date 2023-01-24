@@ -13,13 +13,6 @@ public extension GraphQL.Query {
 }
 
 // MARK: -
-public extension GraphQL.Query.Mutation {
-	var valueStrings: [String] {
-		[]
-	}
-}
-
-// MARK: -
 extension GraphQL.Query.Mutation: CustomStringConvertible {
 	public var description: String {
 		switch self {
