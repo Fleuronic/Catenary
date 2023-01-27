@@ -14,9 +14,9 @@ extension GraphQL.Response.Data: Decodable {
 		let container = try decoder.container(keyedBy: DynamicKey.self)
 		let key = container.allKeys.first!
 
-		/*if let fields = try? container.decode(Fields.self, forKey: key) {
+		if let fields = try? container.decode(Fields.self, forKey: key) {
 			self.fields = [fields]
-		} else*/ if let fields = try? container.decode([Fields].self, forKey: key) {
+		} else if let fields = try? container.decode([Fields].self, forKey: key) {
 			self.fields = fields
 		} else {
 			let data = try container.decode(Self.self, forKey: key)
