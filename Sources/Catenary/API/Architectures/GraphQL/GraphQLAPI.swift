@@ -3,10 +3,14 @@
 import struct Foundation.Data
 import struct Foundation.URLRequest
 import struct PersistDB.Predicate
+import struct PersistDB.Query
+import struct Schemata.None
+import struct Catena.IDFields
 import class Foundation.NSError
 import class Foundation.URLSession
 import class Foundation.JSONEncoder
 import protocol Catena.Fields
+import protocol Catena.Model
 
 public protocol GraphQLAPI: API where Response == GraphQL.Response, Error == GraphQL.Error.List {
 	func queryString<Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String
@@ -14,14 +18,27 @@ public protocol GraphQLAPI: API where Response == GraphQL.Response, Error == Gra
 
 // MARK: -
 public extension GraphQLAPI {
-	func query<Fields: Catena.Fields & Decodable>(_ fields: Fields.Type, where predicate: Predicate<Fields.Model>) async -> Result<[Fields]> {
-		await query(.query(Fields.Model.all.filter(predicate)))
+	func send<Fields: Catena.Fields>(_ query: PersistDB.Query<None, Fields.Model>) async -> Result<[Fields]> {
+		await self.query(.query(query))
+	}
+
+	func send<Fields: Catena.Fields>(_ mutation: GraphQL.Query<Fields>.Mutation) async -> Result<Fields> {
+		await self.query(.mutation(mutation)).map(\.first!)
+	}
+
+	func fetch<Fields: Catena.Fields>(_ fields: Fields.Type, where predicate: Predicate<Fields.Model>) async -> Result<[Fields]> {
+		await send(Fields.Model.all.filter(predicate))
+	}
+
+	func insert<Model: Catena.Model>(_ model: Model) async -> Result<Model.ID> {
+		let result: Result<IDFields<Model>> = await send(.insert(model))
+		return result.map(\.id)
 	}
 }
 
 // MARK: -
 private extension GraphQLAPI {
-	func query<Fields: Catena.Fields & Decodable>(_ query: GraphQL.Query<Fields>) async -> Result<[Fields]> {
+	func query<Fields: Catena.Fields>(_ query: GraphQL.Query<Fields>) async -> Result<[Fields]> {
 		do {
 			let encoder = JSONEncoder()
 			let body = GraphQL.Query<Fields>.Body(queryString: queryString(for: query))
