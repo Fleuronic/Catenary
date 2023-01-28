@@ -6,9 +6,9 @@ import PersistDB
 
 public extension GraphQL.Query {
 	enum Mutation {
-		case insert(Fields.Model)
-		case update(Predicate<Fields.Model>?, ValueSet<Fields.Model>)
-		case delete(Predicate<Fields.Model>?)
+		case insert([Fields.Model], many: Bool = false)
+		case update(Predicate<Fields.Model>?, ValueSet<Fields.Model>, byPrimaryKey: Bool = false)
+		case delete(Predicate<Fields.Model>?, byPrimaryKey: Bool = false)
 	}
 }
 

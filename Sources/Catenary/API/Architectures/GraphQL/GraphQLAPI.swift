@@ -1,10 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Foundation.Data
+import Schemata
+import PersistDB
 import struct Foundation.URLRequest
-import struct PersistDB.Predicate
-import struct PersistDB.Query
-import struct Schemata.None
+import struct Foundation.Data
 import struct Catena.IDFields
 import class Foundation.NSError
 import class Foundation.URLSession
@@ -23,16 +22,11 @@ public extension GraphQLAPI {
 	}
 
 	func send<Fields: Catena.Fields>(_ mutation: GraphQL.Query<Fields>.Mutation) async -> Result<Fields> {
-		await self.query(.mutation(mutation)).map(\.first!)
+		await send(mutation).map(\.first!)
 	}
 
-	func fetch<Fields: Catena.Fields>(_ fields: Fields.Type, where predicate: Predicate<Fields.Model>) async -> Result<[Fields]> {
-		await send(Fields.Model.all.filter(predicate))
-	}
-
-	func insert<Model: Catena.Model>(_ model: Model) async -> Result<Model.ID> {
-		let result: Result<IDFields<Model>> = await send(.insert(model))
-		return result.map(\.id)
+	func send<Fields: Catena.Fields>(_ mutation: GraphQL.Query<Fields>.Mutation) async -> Result<[Fields]> {
+		await query(.mutation(mutation))
 	}
 }
 
