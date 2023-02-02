@@ -7,8 +7,17 @@ import PersistDB
 public extension GraphQL.Query {
 	enum Mutation {
 		case insert([Fields.Model], many: Bool = false)
-		case update(Predicate<Fields.Model>?, ValueSet<Fields.Model>, byPrimaryKey: Bool = false)
-		case delete(Predicate<Fields.Model>?, byPrimaryKey: Bool = false)
+		case update(Selector, ValueSet<Fields.Model>)
+		case delete(Selector)
+	}
+}
+
+// MARK: -
+public extension GraphQL.Query.Mutation {
+	enum Selector {
+		case all
+		case primaryKey(Fields.Model.ID)
+		case predicate(Predicate<Fields.Model>)
 	}
 }
 
