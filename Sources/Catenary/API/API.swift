@@ -2,6 +2,7 @@
 
 import struct Foundation.URL
 import class Foundation.JSONDecoder
+import class Foundation.JSONEncoder
 
 public protocol API {
 	associatedtype Response: APIResponse
@@ -9,6 +10,7 @@ public protocol API {
 
 	var baseURL: URL { get }
 	var decoder: JSONDecoder { get }
+	var encoder: JSONEncoder { get }
 }
 
 // MARK: -
@@ -19,5 +21,11 @@ public extension API {
 		let decoder = JSONDecoder()
 		decoder.keyDecodingStrategy = .convertFromSnakeCase
 		return decoder
+	}
+
+	var encoder: JSONEncoder {
+		let encoder = JSONEncoder()
+		encoder.keyEncodingStrategy = .convertToSnakeCase
+		return encoder
 	}
 }
