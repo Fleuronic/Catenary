@@ -57,14 +57,12 @@ private extension RESTAPI {
 			var urlRequest = URLRequest(url: url)
 			urlRequest.httpMethod = method
 			urlRequest.httpBody = body
-			print(String(decoding: body!, as: UTF8.self))
 
 			if let resource: Result<Resource> = try await mockResource(path: path, method: method) {
 				return resource
 			}
 
 			let (data, _) = try await URLSession.shared.data(for: urlRequest)
-			print(String(decoding: data, as: UTF8.self))
 			return try .success(resource(from: data))
 		} catch let error as Error {
 			return .failure(.api(error))
