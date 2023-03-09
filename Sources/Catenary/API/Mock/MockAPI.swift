@@ -1,8 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import class Foundation.NSError
-import struct Foundation.TimeInterval
-import class Foundation.JSONSerialization
+import Foundation
 
 public protocol MockAPI {
 	func mockJSONObject(path: String, method: String) -> [String: Any]?

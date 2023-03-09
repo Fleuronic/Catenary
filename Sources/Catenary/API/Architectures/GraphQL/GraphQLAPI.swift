@@ -1,15 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import Foundation
 import Schemata
 import PersistDB
-import struct Foundation.URLRequest
-import struct Foundation.Data
-import struct Catena.IDFields
-import class Foundation.NSError
-import class Foundation.URLSession
-import class Foundation.JSONEncoder
-import protocol Catena.Fields
-import protocol Catena.Model
+import Catena
 
 public protocol GraphQLAPI: API where Response == GraphQL.Response, Error == GraphQL.Error.List {
 	func queryString<Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String

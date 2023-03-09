@@ -1,8 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Foundation.URL
-import class Foundation.JSONDecoder
-import class Foundation.JSONEncoder
+import Foundation
 
 public protocol API {
 	associatedtype Response: APIResponse

@@ -1,12 +1,11 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Schemata.None
-import struct PersistDB.Query
-import protocol PersistDB.ModelProjection
-import protocol Catena.Fields
+import Schemata
+import PersistDB
+import Catena
 
 public extension GraphQL {
-	enum Query<Fields: ModelProjection> {
+	enum Query<Fields: PersistDB.ModelProjection> {
 		case query(PersistDB.Query<None, Fields.Model>)
 		case mutation(Mutation)
 	}

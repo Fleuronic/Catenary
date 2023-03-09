@@ -3,7 +3,6 @@
 import Schemata
 import PersistDB
 import Catena
-import Foundation
 
 public extension GraphQL {
 	struct Response {

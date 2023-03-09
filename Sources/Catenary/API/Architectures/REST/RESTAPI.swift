@@ -1,10 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Foundation.URL
-import struct Foundation.URLRequest
-import struct Foundation.Data
-import class Foundation.URLSession
-import class Foundation.NSError
+import Foundation
 
 public protocol RESTAPI: API {}
 
