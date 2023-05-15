@@ -32,7 +32,7 @@ private extension GraphQLAPI {
 			let body = GraphQL.Query<Fields>.Body(queryString: queryString(for: query))
 			var urlRequest = URLRequest(url: baseURL)
 			urlRequest.httpMethod = "POST"
-			urlRequest.addValue("N32FEDGy6CEmYyIQQqNOV8Ch54TqEsIYZy7hu4MHUsMbZYnrb5dh8mbyBYaeV2qx", forHTTPHeaderField: "x-hasura-admin-secret")
+			urlRequest.addValue("lR5HQTqgHxgh3mfrEgLwIgIQLyO68JYN3Eo9pbH7gjgGN0kD7OFQ3FGDaAAgNkUa", forHTTPHeaderField: "x-hasura-admin-secret")
 			urlRequest.httpBody = try encoder.encode(body)
 
 			let (data, _) = try await URLSession.shared.data(for: urlRequest)
