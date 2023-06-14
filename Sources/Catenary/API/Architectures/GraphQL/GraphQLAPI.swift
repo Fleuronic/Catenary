@@ -15,10 +15,6 @@ public extension GraphQLAPI {
 		await self.query(.query(query))
 	}
 
-	func send<Fields: Catena.Fields>(_ mutation: GraphQL.Query<Fields>.Mutation) async -> Result<Fields> {
-		await send(mutation).map(\.first!)
-	}
-
 	func send<Fields: Catena.Fields>(_ mutation: GraphQL.Query<Fields>.Mutation) async -> Result<[Fields]> {
 		await query(.mutation(mutation))
 	}
@@ -32,7 +28,7 @@ private extension GraphQLAPI {
 			let body = GraphQL.Query<Fields>.Body(queryString: queryString(for: query))
 			var urlRequest = URLRequest(url: baseURL)
 			urlRequest.httpMethod = "POST"
-			urlRequest.addValue("lR5HQTqgHxgh3mfrEgLwIgIQLyO68JYN3Eo9pbH7gjgGN0kD7OFQ3FGDaAAgNkUa", forHTTPHeaderField: "x-hasura-admin-secret")
+			urlRequest.addValue("B7yNhxTpV5iNSGQQeZ3c26wPqPo6lyqSbPoYD41U5UEuhHMuEidpaZ3AkBLIG8xm", forHTTPHeaderField: "x-hasura-admin-secret")
 			urlRequest.httpBody = try encoder.encode(body)
 
 			let (data, _) = try await URLSession.shared.data(for: urlRequest)

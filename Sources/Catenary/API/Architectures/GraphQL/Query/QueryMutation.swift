@@ -15,9 +15,8 @@ public extension GraphQL.Query {
 // MARK: -
 public extension GraphQL.Query.Mutation {
 	enum Selector {
-		case all
 		case primaryKey(Fields.Model.ID)
-		case predicate(Predicate<Fields.Model>)
+		case predicate(Predicate<Fields.Model>?)
 	}
 }
 
