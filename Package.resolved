@@ -6,7 +6,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "4b71f9e54af05168866b69b26ccbb22dd98b3e2c"
+        "revision" : "bfc1c3b7a82608587dea9b98a6bccb68bd714efb"
       }
     },
     {
@@ -33,7 +33,7 @@
       "location" : "https://github.com/Fleuronic/PersistDB",
       "state" : {
         "branch" : "master",
-        "revision" : "28cc0b1e23b06d3dd4b77bf4992c073681218dc6"
+        "revision" : "d4b550cb11f2abad400431d308291974cd14a6b9"
       }
     },
     {
@@ -48,10 +48,10 @@
     {
       "identity" : "schemata",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Schemata.git",
+      "location" : "https://github.com/Fleuronic/Schemata",
       "state" : {
         "branch" : "master",
-        "revision" : "781162892f5f9da4a155a25dc47ff948e26b3960"
+        "revision" : "32be7bd5f65405678257aeee76859b03cffb89e7"
       }
     }
   ],

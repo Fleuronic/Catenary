@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
 	name: "Catenary",
 	platforms: [
-		.iOS(.v12),
-		.macOS(.v10_13),
-		.watchOS(.v6),
-		.tvOS(.v12)
+		.iOS(.v13),
+		.macOS(.v10_15),
+		.tvOS(.v13),
+		.watchOS(.v6)
 	],
 	products: [
 		.library(
