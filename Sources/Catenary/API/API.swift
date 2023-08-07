@@ -1,12 +1,15 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Foundation
+import struct Foundation.URL
+import class Foundation.JSONDecoder
+import class Foundation.JSONEncoder
 
 public protocol API {
 	associatedtype Response: APIResponse
 	associatedtype Error: APIError
 
 	var baseURL: URL { get }
+	var authenticationHeader: Request.Header? { get }
 	var decoder: JSONDecoder { get }
 	var encoder: JSONEncoder { get }
 }
@@ -14,6 +17,8 @@ public protocol API {
 // MARK: -
 public extension API {
 	typealias Result<Resource> = Swift.Result<Resource, Request.Error<Error>>
+
+	var authenticationHeader: Request.Header? { nil }
 
 	var decoder: JSONDecoder {
 		let decoder = JSONDecoder()

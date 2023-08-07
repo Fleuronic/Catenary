@@ -1,6 +1,5 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Catena
 import Schemata
 import PersistDB
 

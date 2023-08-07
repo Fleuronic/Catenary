@@ -1,6 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Foundation
+import class Foundation.NSError
 
 public extension Request {
 	enum Error<Error: APIError> {

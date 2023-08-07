@@ -1,9 +1,14 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Foundation
 import Schemata
 import PersistDB
-import Catena
+
+import struct Foundation.Data
+import struct Foundation.URLRequest
+import class Foundation.NSError
+import class Foundation.URLSession
+import class Foundation.JSONEncoder
+import protocol Catena.Fields
 
 public protocol GraphQLAPI: API where Response == GraphQL.Response, Error == GraphQL.Error.List {
 	func queryString<Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String
@@ -26,10 +31,11 @@ private extension GraphQLAPI {
 		do {
 			let encoder = JSONEncoder()
 			let body = GraphQL.Query<Fields>.Body(queryString: queryString(for: query))
+
 			var urlRequest = URLRequest(url: baseURL)
 			urlRequest.httpMethod = "POST"
-			urlRequest.addValue("B7yNhxTpV5iNSGQQeZ3c26wPqPo6lyqSbPoYD41U5UEuhHMuEidpaZ3AkBLIG8xm", forHTTPHeaderField: "x-hasura-admin-secret")
 			urlRequest.httpBody = try encoder.encode(body)
+			authenticationHeader.map { urlRequest.apply($0) }
 
 			let (data, _) = try await URLSession.shared.data(for: urlRequest)
 			return try .success(resource(from: data))

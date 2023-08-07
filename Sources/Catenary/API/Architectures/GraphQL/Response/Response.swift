@@ -2,7 +2,6 @@
 
 import Schemata
 import PersistDB
-import Catena
 
 public extension GraphQL {
 	struct Response {
