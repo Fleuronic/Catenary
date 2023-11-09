@@ -19,7 +19,7 @@ public extension Request {
 
 // MARK: -
 extension Request.Header {
-	var jsonContentType: Self {
+	static var jsonContentType: Self {
 		.init(
 			field: "Content-Type",
 			value: "application/json"
