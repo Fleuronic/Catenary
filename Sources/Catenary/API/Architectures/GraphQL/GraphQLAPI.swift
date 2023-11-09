@@ -35,6 +35,8 @@ private extension GraphQLAPI {
 			var urlRequest = URLRequest(url: baseURL)
 			urlRequest.httpMethod = "POST"
 			urlRequest.httpBody = try encoder.encode(body)
+
+			urlRequest.apply(.jsonContentType)
 			authenticationHeader.map { urlRequest.apply($0) }
 
 			let (data, _) = try await URLSession.shared.data(for: urlRequest)

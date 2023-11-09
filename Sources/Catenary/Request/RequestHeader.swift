@@ -18,6 +18,16 @@ public extension Request {
 }
 
 // MARK: -
+extension Request.Header {
+	var jsonContentType: Self {
+		.init(
+			field: "Content-Type",
+			value: "application/json"
+		)
+	}
+}
+
+// MARK: -
 extension URLRequest {
 	mutating func apply(_ header: Request.Header) {
 		setValue(header.value, forHTTPHeaderField: header.field)
