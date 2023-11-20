@@ -2,6 +2,7 @@
 
 import Schemata
 import PersistDB
+import SociableWeaver
 
 import struct Foundation.Data
 import struct Foundation.URLRequest
@@ -11,17 +12,46 @@ import class Foundation.JSONEncoder
 import protocol Catena.Fields
 
 public protocol GraphQLAPI: API where Response == GraphQL.Response, Error == GraphQL.Error.List {
+	var connectionOptions: GraphQL.Connection.Options { get }
+
 	func queryString<Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String
 }
 
 // MARK: -
 public extension GraphQLAPI {
+	func query<Fields: Catena.Fields>(id: Fields.Model.ID, returning fields: Fields.Type) async -> Result<Fields?> {
+		let query = Fields.Model.all.filter(Fields.Model.idKeyPath == id)
+		return await self.query(.query(query, scope: .single)).map(\.first)
+	}
+
+	func query<Fields: Catena.Fields>(where predicate: Expression<Fields.Model, Bool>? = nil, returning fields: Fields.Type) async -> Result<[Fields]> {
+		let query = predicate.map { Fields.Model.all.filter($0) } ?? Fields.Model.all
+		return await self.query(.query(query, scope: .many(options: connectionOptions)))
+	}
+
 	func send<Fields: Catena.Fields>(_ query: PersistDB.Query<None, Fields.Model>) async -> Result<[Fields]> {
 		await self.query(.query(query))
 	}
 
 	func send<Fields: Catena.Fields>(_ mutation: GraphQL.Query<Fields>.Mutation) async -> Result<[Fields]> {
 		await query(.mutation(mutation))
+	}
+
+	// MARK: GraphQLAPI
+	var connectionOptions: GraphQL.Connection.Options { [] }
+
+	func queryString<Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String {
+		switch query {
+		case let .query(query, scope):
+			let arguments = arguments(for: query)
+			return Weave(.query) {
+				arguments.reduce(object(in: scope)) {
+					$0.argument(key: $1.0, value: $1.1)
+				}
+			}.description
+		case .mutation:
+			return ""
+		}
 	}
 }
 
@@ -57,5 +87,35 @@ private extension GraphQLAPI {
 		} catch {
 			throw try decoder.decode(Error.self, from: data)
 		}
+	}
+
+	func object<Fields: Catena.Fields>(in scope: GraphQL.Query<Fields>.Scope) -> Object {
+		let fields = ForEachWeavable(
+			Fields.projection
+				.keyPaths
+				.map(Fields.Model.schema.properties)
+				.flatMap { $0.map(\.path) },
+			content: Field.init
+		)
+
+		return .init(scope.queryName) {
+			switch scope {
+			case let .many(options) where options.contains(.nodes):
+				Object(GraphQL.Connection.Options.nodes.field) { fields }
+			default:
+				fields
+			}
+		}
+	}
+
+	func arguments<Model>(for query: PersistDB.Query<None, Model>) -> [(String, ArgumentValueRepresentable)] {
+		query.predicates
+			.flatMap(\.dictionary)
+			.compactMap { key, value in
+			   guard
+				   let value = value as? [String: Any],
+				   let value = value["=="] as? ArgumentValueRepresentable else { return nil }
+			   return (key, value)
+			}
 	}
 }
