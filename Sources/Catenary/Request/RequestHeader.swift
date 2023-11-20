@@ -1,19 +1,13 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import InitMacro
+
 import struct Foundation.URLRequest
 
-public extension Request {
-	struct Header {
+extension Request {
+	@Init public struct Header {
 		let field: String
 		let value: String
-
-		public init(
-			field: String,
-			value: String
-		) {
-			self.field = field
-			self.value = value
-		}
 	}
 }
 
