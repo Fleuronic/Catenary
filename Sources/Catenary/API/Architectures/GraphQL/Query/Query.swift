@@ -3,9 +3,11 @@
 import Schemata
 import PersistDB
 
+import protocol Catena.Fields
+
 public extension GraphQL {
-	enum Query<Fields: PersistDB.ModelProjection> {
-		case query(PersistDB.Query<None, Fields.Model>)
+	enum Query<Fields: Catena.Fields> {
+		case query(PersistDB.Query<None, Fields.Model>, scope: Scope = .many())
 		case mutation(Mutation)
 	}
 }
