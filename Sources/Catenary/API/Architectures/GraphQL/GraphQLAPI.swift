@@ -59,13 +59,11 @@ public extension GraphQLAPI {
 private extension GraphQLAPI {
 	func query<Fields: Catena.Fields>(_ query: GraphQL.Query<Fields>) async -> Result<[Fields]> {
 		do {
-			let encoder = JSONEncoder()
+			var urlRequest = URLRequest(url: baseURL)
 			let body = GraphQL.Query<Fields>.Body(queryString: queryString(for: query))
 
-			var urlRequest = URLRequest(url: baseURL)
 			urlRequest.httpMethod = "POST"
 			urlRequest.httpBody = try encoder.encode(body)
-
 			urlRequest.apply(.jsonContentType)
 			authenticationHeader.map { urlRequest.apply($0) }
 
