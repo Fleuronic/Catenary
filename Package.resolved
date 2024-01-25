@@ -6,7 +6,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "bfc1c3b7a82608587dea9b98a6bccb68bd714efb"
+        "revision" : "a70187edce70f36c52a5a6764533870cce4fd8a3"
       }
     },
     {
@@ -28,12 +28,21 @@
       }
     },
     {
+      "identity" : "initmacro",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LeonardoCardoso/InitMacro.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6b1488c4b540c70e1952dd2ece985dbe266e8964"
+      }
+    },
+    {
       "identity" : "persistdb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/PersistDB",
       "state" : {
         "branch" : "master",
-        "revision" : "d4b550cb11f2abad400431d308291974cd14a6b9"
+        "revision" : "edc45a9c1a217c6640af2b8b1f2a2bc538997641"
       }
     },
     {
@@ -51,7 +60,25 @@
       "location" : "https://github.com/Fleuronic/Schemata",
       "state" : {
         "branch" : "master",
-        "revision" : "32be7bd5f65405678257aeee76859b03cffb89e7"
+        "revision" : "0f0669c9f8bab8769c2710f5d3a91de95a2533d6"
+      }
+    },
+    {
+      "identity" : "sociableweaver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/NicholasBellucci/SociableWeaver.git",
+      "state" : {
+        "revision" : "dd8368fcf1f8fef5d672ea64775dc6f7b02d7a92",
+        "version" : "0.1.12"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
+        "version" : "509.0.0"
       }
     }
   ],
