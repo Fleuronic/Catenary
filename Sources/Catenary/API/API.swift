@@ -12,7 +12,7 @@ public protocol API {
 	var decoder: JSONDecoder { get }
 	var encoder: JSONEncoder { get }
 
-	func url(forPath path: String) -> URL
+	func url(for path: String) -> URL
 }
 
 // MARK: -
