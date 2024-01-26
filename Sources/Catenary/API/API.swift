@@ -8,10 +8,11 @@ public protocol API {
 	associatedtype Response: APIResponse
 	associatedtype Error: APIError
 
-	var baseURL: URL { get }
 	var authenticationHeader: Request.Header? { get }
 	var decoder: JSONDecoder { get }
 	var encoder: JSONEncoder { get }
+
+	func url(forPath path: String) -> URL
 }
 
 // MARK: -

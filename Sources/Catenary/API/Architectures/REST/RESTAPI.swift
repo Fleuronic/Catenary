@@ -53,8 +53,7 @@ private extension RESTAPI {
 		body: Data? = nil
 	) async -> Result<Resource> {
 		do {
-			let url = URL(string: "\(baseURL.absoluteString)\(path)")!
-			var urlRequest = URLRequest(url: url)
+			var urlRequest = URLRequest(url: url(forPath: path))
 			urlRequest.httpMethod = method
 			urlRequest.httpBody = body
 

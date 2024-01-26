@@ -59,7 +59,7 @@ public extension GraphQLAPI {
 private extension GraphQLAPI {
 	func query<Fields: Catena.Fields>(_ query: GraphQL.Query<Fields>) async -> Result<[Fields]> {
 		do {
-			var urlRequest = URLRequest(url: baseURL)
+			var urlRequest = URLRequest(url: url(forPath: .init()))
 			let body = GraphQL.Query<Fields>.Body(queryString: queryString(for: query))
 
 			urlRequest.httpMethod = "POST"
@@ -110,10 +110,10 @@ private extension GraphQLAPI {
 		query.predicates
 			.flatMap(\.dictionary)
 			.compactMap { key, value in
-			   guard
-				   let value = value as? [String: Any],
-				   let value = value["=="] as? ArgumentValueRepresentable else { return nil }
-			   return (key, value)
+				guard
+					let value = value as? [String: Any],
+					let value = value["=="] as? ArgumentValueRepresentable else { return nil }
+				return (key, value)
 			}
 	}
 }
