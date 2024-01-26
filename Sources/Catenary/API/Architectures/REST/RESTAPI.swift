@@ -37,11 +37,7 @@ public extension RESTAPI {
 // MARK: -
 extension RESTAPI {
 	func resource<Resource: Decodable>(from data: Data) throws -> Resource {
-		do {
-			return try decoder.decode(Response.self, from: data).resource()
-		} catch is DecodingError {
-			throw try decoder.decode(Error.self, from: data)
-		}
+		try decoder.decode(Response.self, from: data).resource()
 	}
 }
 
