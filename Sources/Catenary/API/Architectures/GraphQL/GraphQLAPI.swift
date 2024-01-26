@@ -59,7 +59,7 @@ public extension GraphQLAPI {
 private extension GraphQLAPI {
 	func query<Fields: Catena.Fields>(_ query: GraphQL.Query<Fields>) async -> Result<[Fields]> {
 		do {
-			var urlRequest = URLRequest(url: url(for: .graphql))
+			var urlRequest = URLRequest(url: url(for: .path))
 			let body = GraphQL.Query<Fields>.Body(queryString: queryString(for: query))
 
 			urlRequest.httpMethod = "POST"
