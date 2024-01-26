@@ -1,8 +1,5 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Schemata
-import PersistDB
-
 public extension GraphQL {
 	struct Response {
 		private let container: KeyedDecodingContainer<CodingKeys>
