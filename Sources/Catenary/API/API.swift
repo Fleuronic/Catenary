@@ -8,9 +8,9 @@ public protocol API {
 	associatedtype Response: APIResponse
 	associatedtype Error: APIError
 
-	var authenticationHeader: Request.Header? { get }
 	var decoder: JSONDecoder { get }
 	var encoder: JSONEncoder { get }
+	var authenticationHeader: Request.Header? { get }
 
 	func url(for path: String) -> URL
 }
@@ -18,8 +18,6 @@ public protocol API {
 // MARK: -
 public extension API {
 	typealias Result<Resource> = Swift.Result<Resource, Request.Error<Error>>
-
-	var authenticationHeader: Request.Header? { nil }
 
 	var decoder: JSONDecoder {
 		let decoder = JSONDecoder()
@@ -32,4 +30,6 @@ public extension API {
 		encoder.keyEncodingStrategy = .convertToSnakeCase
 		return encoder
 	}
+
+	var authenticationHeader: Request.Header? { nil }
 }
