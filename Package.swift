@@ -19,16 +19,14 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Fleuronic/Catena", branch: "main"),
-		.package(url: "https://github.com/NicholasBellucci/SociableWeaver.git", from: "0.1.0"),
-		.package(url: "https://github.com/LeonardoCardoso/InitMacro.git", branch: "main")
+		.package(url: "https://github.com/NicholasBellucci/SociableWeaver.git", from: "0.1.0")
 	],
 	targets: [
 		.target(
 			name: "Catenary",
 			dependencies: [
 				"Catena",
-				"SociableWeaver",
-				"InitMacro"
+				"SociableWeaver"
 			]
 		)
 	]
