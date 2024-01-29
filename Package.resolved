@@ -6,7 +6,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "bbdb2151a87789c1a5cde18576b49dea70fca610"
+        "revision" : "dd077ba642cf85af25775faa965028deed1c0f19"
       }
     },
     {
@@ -25,6 +25,15 @@
       "state" : {
         "revision" : "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
         "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "initmacro",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LeonardoCardoso/InitMacro.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6b1488c4b540c70e1952dd2ece985dbe266e8964"
       }
     },
     {
@@ -61,6 +70,15 @@
       "state" : {
         "revision" : "dd8368fcf1f8fef5d672ea64775dc6f7b02d7a92",
         "version" : "0.1.12"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
+        "version" : "509.0.0"
       }
     }
   ],
