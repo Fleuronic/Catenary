@@ -14,12 +14,9 @@ public extension Request {
 public extension Request.Error {
 	var message: String {
 		switch self {
-		case let .api(error):
-			return error.message
-		case let .network(error):
-			return error.localizedDescription
-		case let .decoding(error):
-			return error.localizedDescription
+		case let .api(error): error.message
+		case let .network(error): error.localizedDescription
+		case let .decoding(error): error.localizedDescription
 		}
 	}
 }
