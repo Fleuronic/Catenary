@@ -9,38 +9,39 @@ import struct Foundation.URLRequest
 import class Foundation.NSError
 import class Foundation.URLSession
 import class Foundation.JSONEncoder
+import protocol Catena.Model
 import protocol Catena.Fields
 
 public protocol GraphQLAPI: API where Response == GraphQL.Response, Error == GraphQL.Error.List {
 	var connectionOptions: GraphQL.Connection.Options { get }
 
-	func queryString<Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String
+	func queryString<Model: Catena.Model, Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String where Model == Fields.Model
 }
 
 // MARK: -
 public extension GraphQLAPI {
-	func query<Fields: Catena.Fields>(id: Fields.Model.ID, returning fields: Fields.Type) async -> Result<Fields?> {
-		let query = Fields.Model.all.filter(Fields.Model.idKeyPath == id)
+	func query<Model: Catena.Model, Fields: Catena.Fields>(id: Model.ID, returning fields: Fields.Type) async -> Result<Fields?> where Model == Fields.Model {
+		let query = Fields.Model.all.filter(Model.idKeyPath == id)
 		return await self.query(.query(query, scope: .single)).map(\.first)
 	}
 
-	func query<Fields: Catena.Fields>(where predicate: Expression<Fields.Model, Bool>? = nil, returning fields: Fields.Type) async -> Result<[Fields]> {
+	func query<Model: Catena.Model, Fields: Catena.Fields>(where predicate: Expression<Fields.Model, Bool>? = nil, returning fields: Fields.Type) async -> Result<[Fields]>  where Model == Fields.Model {
 		let query = predicate.map { Fields.Model.all.filter($0) } ?? Fields.Model.all
 		return await self.query(.query(query, scope: .many(options: connectionOptions)))
 	}
 
-	func send<Fields: Catena.Fields>(_ query: PersistDB.Query<None, Fields.Model>) async -> Result<[Fields]> {
+	func send<Model: Catena.Model, Fields: Catena.Fields>(_ query: PersistDB.Query<None, Fields.Model>) async -> Result<[Fields]>  where Model == Fields.Model {
 		await self.query(.query(query))
 	}
 
-	func send<Fields: Catena.Fields>(_ mutation: GraphQL.Query<Fields>.Mutation) async -> Result<[Fields]> {
+	func send<Model: Catena.Model, Fields: Catena.Fields>(_ mutation: GraphQL.Query<Fields>.Mutation) async -> Result<[Fields]> where Model == Fields.Model {
 		await query(.mutation(mutation))
 	}
 
 	// MARK: GraphQLAPI
 	var connectionOptions: GraphQL.Connection.Options { [] }
 
-	func queryString<Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String {
+	func queryString<Model: Catena.Model, Fields: Catena.Fields>(for query: GraphQL.Query<Fields>) -> String where Model == Fields.Model {
 		switch query {
 		case let .query(query, scope):
 			let arguments = arguments(for: query)
@@ -57,7 +58,7 @@ public extension GraphQLAPI {
 
 // MARK: -
 private extension GraphQLAPI {
-	func query<Fields: Catena.Fields>(_ query: GraphQL.Query<Fields>) async -> Result<[Fields]> {
+	func query<Model: Catena.Model, Fields: Catena.Fields>(_ query: GraphQL.Query<Fields>) async -> Result<[Fields]> where Model == Fields.Model {
 		do {
 			var urlRequest = URLRequest(url: url(for: .path))
 			let body = GraphQL.Query<Fields>.Body(queryString: queryString(for: query))
