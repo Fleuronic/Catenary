@@ -52,6 +52,7 @@ private extension RESTAPI {
 			var urlRequest = URLRequest(url: url(for: path))
 			urlRequest.httpMethod = method
 			urlRequest.httpBody = body
+			authenticationHeader.map { urlRequest.apply($0) }
 
 			if let resource: Result<Resource> = try await mockResource(path: path, method: method) {
 				return resource
