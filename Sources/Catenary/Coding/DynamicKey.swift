@@ -1,15 +1,15 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-struct DynamicKey: CodingKey {
-	var intValue: Int?
-	var stringValue: String
+public struct DynamicKey: CodingKey {
+	public var intValue: Int?
+	public var stringValue: String
 
-	init?(intValue: Int) {
+	public init?(intValue: Int) {
 		self.intValue = intValue
 		stringValue = .init(describing: intValue)
 	}
 
-	init?(stringValue: String) {
+	public init?(stringValue: String) {
 		intValue = nil
 		self.stringValue = stringValue
 	}
