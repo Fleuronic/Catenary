@@ -3,6 +3,7 @@
 import struct Foundation.Data
 import struct Foundation.URL
 import struct Foundation.URLRequest
+import struct Foundation.URLComponents
 import class Foundation.URLSession
 import class Foundation.NSError
 
@@ -32,12 +33,21 @@ public extension RESTAPI {
 			body: try! encoder.encode(postedResource)
 		)
 	}
+
+	func deleteResource(at path: String) async -> Result<Void> {
+		let result: Result<EmptyResource> = await resource(
+			path: path,
+			method: "DELETE"
+		)
+
+		return result.map { _ in }
+	}
 }
 
 // MARK: -
 extension RESTAPI {
 	func resource<Resource: Decodable>(from data: Data) throws -> Resource {
-		try decoder.decode(Response.self, from: data).resource()
+		try data as? Resource ?? decoder.decode(Response.self, from: data).resource()
 	}
 }
 
@@ -49,14 +59,18 @@ private extension RESTAPI {
 		body: Data? = nil
 	) async -> Result<Resource> {
 		do {
-			var urlRequest = URLRequest(url: url(for: path))
-			urlRequest.httpMethod = method
-			urlRequest.httpBody = body
-			authenticationHeader.map { urlRequest.apply($0) }
-
 			if let resource: Result<Resource> = try await mockResource(path: path, method: method) {
 				return resource
 			}
+
+			let url = url(for: path)
+			let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+//			components.queryItems = [.init(name: "url", value: "https://www.apple.com")]
+
+			var urlRequest = URLRequest(url: components.url!)
+			urlRequest.httpMethod = method
+			urlRequest.httpBody = body
+			authenticationHeader.map { urlRequest.apply($0) }
 
 			let (data, _) = try await URLSession.shared.data(for: urlRequest)
 			return try .success(resource(from: data))
@@ -69,3 +83,6 @@ private extension RESTAPI {
 		}
 	}
 }
+
+private struct EmptyResource: Decodable {}
+
