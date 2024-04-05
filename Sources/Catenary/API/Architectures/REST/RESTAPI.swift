@@ -74,7 +74,7 @@ private extension RESTAPI {
 
 			let url = url(for: path)
 			var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-			components.queryItems = parameters.queryItems
+			components.queryItems = try parameters.queryItems
 
 			var urlRequest = URLRequest(url: components.url!)
 			urlRequest.httpMethod = method
