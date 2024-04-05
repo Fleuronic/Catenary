@@ -18,6 +18,14 @@ public extension RESTAPI {
 		)
 	}
 
+	func getResource<Resource: Decodable>(at path: String, with parameters: some Parameters) async -> Result<Resource> {
+		await resource(
+			path: path,
+			method: "GET",
+			parameters: parameters
+		)
+	}
+
 	func post<Resource: Decodable>(_ data: Data, to path: String) async -> Result<Resource> {
 		await resource(
 			path: path,
@@ -53,9 +61,10 @@ extension RESTAPI {
 
 // MARK: -
 private extension RESTAPI {
-	func resource<Resource: Decodable>(
+	func resource<Resource: Decodable, QueryParameters: Parameters>(
 		path: String,
 		method: String,
+		parameters: QueryParameters = EmptyParameters(),
 		body: Data? = nil
 	) async -> Result<Resource> {
 		do {
@@ -64,8 +73,8 @@ private extension RESTAPI {
 			}
 
 			let url = url(for: path)
-			let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-//			components.queryItems = [.init(name: "url", value: "https://www.apple.com")]
+			var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+			components.queryItems = parameters.queryItems
 
 			var urlRequest = URLRequest(url: components.url!)
 			urlRequest.httpMethod = method
