@@ -26,19 +26,35 @@ public extension RESTAPI {
 		)
 	}
 
-	func post<Resource: Decodable>(_ data: Data, to path: String) async -> Result<Resource> {
-		await resource(
-			path: path,
-			method: "POST",
-			body: data
-		)
-	}
+//	func post<Resource: Decodable>(_ data: Data, to path: String) async -> Result<Resource> {
+//		await resource(
+//			path: path,
+//			method: "POST",
+//			body: data
+//		)
+//	}
+//
+//	func postResource<Resource: Decodable, PostedResource: Encodable>(_ postedResource: PostedResource, to path: String) async -> Result<Resource> {
+//		await resource(
+//			path: path,
+//			method: "POST",
+//			body: try! encoder.encode(postedResource)
+//		)
+//	}
+//
+//	func postResource<Resource: Decodable, PostedResource: Encodable>(_ postedResource: PostedResource, to path: String, with parameters: some Parameters) async -> Result<Resource> {
+//		await resource(
+//			path: path,
+//			method: "POST",
+//			parameters: parameters,
+//			body: try! encoder.encode(postedResource)
+//		)
+//	}
 
-	func postResource<Resource: Decodable, PostedResource: Encodable>(_ postedResource: PostedResource, to path: String) async -> Result<Resource> {
+	func put<ReturnedResource: Decodable>(at path: String) async -> Result<ReturnedResource> {
 		await resource(
 			path: path,
-			method: "POST",
-			body: try! encoder.encode(postedResource)
+			method: "PUT"
 		)
 	}
 
