@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "dictionarycoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/almazrafi/DictionaryCoder.git",
+      "state" : {
+        "revision" : "ebcbaeb20ca5f62ed0365fa7f0473e0d480b931e",
+        "version" : "1.2.0"
+      }
+    },
+    {
       "identity" : "differ",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tonyarnold/Differ.git",
