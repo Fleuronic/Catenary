@@ -51,10 +51,37 @@ public extension RESTAPI {
 //		)
 //	}
 
+	func put(at path: String) async -> Result<Void> {
+		let result: Result<EmptyResource> = await resource(
+			path: path,
+			method: "PUT"
+		)
+
+		return result.map { _ in }
+	}
+
 	func put<ReturnedResource: Decodable>(at path: String) async -> Result<ReturnedResource> {
 		await resource(
 			path: path,
 			method: "PUT"
+		)
+	}
+
+	func put(at path: String, with parameters: some Parameters) async -> Result<Void> {
+		let result: Result<EmptyResource> = await resource(
+			path: path,
+			method: "PUT",
+			parameters: parameters
+		)
+
+		return result.map { _ in }
+	}
+
+	func put<ReturnedResource: Decodable>(at path: String, with parameters: some Parameters) async -> Result<ReturnedResource> {
+		await resource(
+			path: path,
+			method: "PUT",
+			parameters: parameters
 		)
 	}
 
@@ -90,7 +117,10 @@ private extension RESTAPI {
 
 			let url = url(for: path)
 			var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-			components.queryItems = try parameters.queryItems
+			let queryItems = try parameters.queryItems
+			if !queryItems.isEmpty {
+				components.queryItems = queryItems
+			}
 
 			var urlRequest = URLRequest(url: components.url!)
 			urlRequest.httpMethod = method
