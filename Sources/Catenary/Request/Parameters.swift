@@ -21,4 +21,6 @@ public extension Parameters {
 }
 
 // MARK: -
-struct EmptyParameters: Parameters {}
+public struct EmptyParameters: Parameters {
+	public init() {}
+}

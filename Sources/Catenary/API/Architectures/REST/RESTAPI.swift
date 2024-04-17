@@ -11,14 +11,7 @@ public protocol RESTAPI: API {}
 
 // MARK: -
 public extension RESTAPI {
-	func getResource<Resource: Decodable>(at path: String) async -> Result<Resource> {
-		await resource(
-			path: path,
-			method: "GET"
-		)
-	}
-
-	func getResource<Resource: Decodable>(at path: String, with parameters: some Parameters) async -> Result<Resource> {
+	func getResource<Resource: Decodable, QueryParameters: Parameters>(at path: String, with parameters: QueryParameters = EmptyParameters()) async -> Result<Resource> {
 		await resource(
 			path: path,
 			method: "GET",
@@ -26,48 +19,16 @@ public extension RESTAPI {
 		)
 	}
 
-//	func post<Resource: Decodable>(_ data: Data, to path: String) async -> Result<Resource> {
-//		await resource(
-//			path: path,
-//			method: "POST",
-//			body: data
-//		)
-//	}
-//
-//	func postResource<Resource: Decodable, PostedResource: Encodable>(_ postedResource: PostedResource, to path: String) async -> Result<Resource> {
-//		await resource(
-//			path: path,
-//			method: "POST",
-//			body: try! encoder.encode(postedResource)
-//		)
-//	}
-//
-//	func postResource<Resource: Decodable, PostedResource: Encodable>(_ postedResource: PostedResource, to path: String, with parameters: some Parameters) async -> Result<Resource> {
-//		await resource(
-//			path: path,
-//			method: "POST",
-//			parameters: parameters,
-//			body: try! encoder.encode(postedResource)
-//		)
-//	}
-
-	func put(at path: String) async -> Result<Void> {
-		let result: Result<EmptyResource> = await resource(
+	func post<Resource: Encodable, ReturnedResource: Decodable, QueryParameters: Parameters>(_ resource: Resource, to path: String, with parameters: QueryParameters = EmptyParameters()) async -> Result<ReturnedResource> {
+		await self.resource(
 			path: path,
-			method: "PUT"
-		)
-
-		return result.map { _ in }
-	}
-
-	func put<ReturnedResource: Decodable>(at path: String) async -> Result<ReturnedResource> {
-		await resource(
-			path: path,
-			method: "PUT"
+			method: "POST",
+			parameters: parameters,
+			body: try! encoder.encode(resource)
 		)
 	}
 
-	func put(at path: String, with parameters: some Parameters) async -> Result<Void> {
+	func put<QueryParameters: Parameters>(at path: String, with parameters: QueryParameters = EmptyParameters()) async -> Result<Void> {
 		let result: Result<EmptyResource> = await resource(
 			path: path,
 			method: "PUT",
@@ -77,7 +38,8 @@ public extension RESTAPI {
 		return result.map { _ in }
 	}
 
-	func put<ReturnedResource: Decodable>(at path: String, with parameters: some Parameters) async -> Result<ReturnedResource> {
+
+	func put<ReturnedResource: Decodable, QueryParameters: Parameters>(at path: String, with parameters: QueryParameters = EmptyParameters()) async -> Result<ReturnedResource> {
 		await resource(
 			path: path,
 			method: "PUT",
@@ -85,10 +47,11 @@ public extension RESTAPI {
 		)
 	}
 
-	func deleteResource(at path: String) async -> Result<Void> {
+	func deleteResource<QueryParameters: Parameters>(at path: String, with parameters: QueryParameters = EmptyParameters()) async -> Result<Void> {
 		let result: Result<EmptyResource> = await resource(
 			path: path,
-			method: "DELETE"
+			method: "DELETE",
+			parameters: parameters
 		)
 
 		return result.map { _ in }
@@ -107,7 +70,7 @@ private extension RESTAPI {
 	func resource<Resource: Decodable, QueryParameters: Parameters>(
 		path: String,
 		method: String,
-		parameters: QueryParameters = EmptyParameters(),
+		parameters: QueryParameters,
 		body: Data? = nil
 	) async -> Result<Resource> {
 		do {
