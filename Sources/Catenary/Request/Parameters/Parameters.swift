@@ -3,7 +3,9 @@
 import struct Foundation.URLQueryItem
 import class DictionaryCoder.DictionaryEncoder
 
-public protocol Parameters: Encodable {}
+public protocol Parameters: Encodable {
+	var queryItems: [URLQueryItem] { get throws }
+}
 
 // MARK: -
 public extension Parameters {
@@ -18,9 +20,4 @@ public extension Parameters {
 			}
 		}
 	}
-}
-
-// MARK: -
-public struct EmptyParameters: Parameters {
-	public init() {}
 }
