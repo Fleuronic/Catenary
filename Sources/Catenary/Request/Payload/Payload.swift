@@ -8,7 +8,7 @@ public protocol Payload: Encodable {
 }
 
 // MARK: -
-public extension Parameters {
+public extension Payload {
 	func data(using encoder: JSONEncoder) -> Data? {
 		try! encoder.encode(self)
 	}
