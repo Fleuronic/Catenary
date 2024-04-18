@@ -39,7 +39,8 @@ public extension RESTAPI {
 		)
 	}
 
-	func put(at path: String, with parameters: some Parameters = EmptyParameters()) async -> Result<Void> {
+	func put(at path: String, using payload: some Payload = EmptyPayload(), with parameters: some Parameters = EmptyParameters()) async -> Result<Void> {
+		// TODO
 		let result: Result<EmptyResource> = await resource(
 			path: path,
 			method: "PUT",
@@ -49,7 +50,7 @@ public extension RESTAPI {
 		return result.map { _ in }
 	}
 
-	func put<Resource: Decodable>(at path: String, with parameters: some Parameters = EmptyParameters()) async -> Result<Resource> {
+	func put<Resource: Decodable>(at path: String, using payload: some Payload = EmptyPayload(), with parameters: some Parameters = EmptyParameters()) async -> Result<Resource> {
 		await resource(
 			path: path,
 			method: "PUT",
@@ -101,6 +102,10 @@ private extension RESTAPI {
 			urlRequest.httpMethod = method
 			urlRequest.httpBody = body
 			authenticationHeader.map { urlRequest.apply($0) }
+
+			if body != nil {
+				urlRequest.apply(.jsonContentType)
+			}
 
 			let (data, _) = try await URLSession.shared.data(for: urlRequest)
 			return try .success(resource(from: data))
