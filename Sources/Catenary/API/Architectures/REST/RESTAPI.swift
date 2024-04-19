@@ -44,7 +44,8 @@ public extension RESTAPI {
 		let result: Result<EmptyResource> = await resource(
 			path: path,
 			method: "PUT",
-			parameters: parameters
+			parameters: parameters,
+			body: payload.data(using: encoder)
 		)
 
 		return result.map { _ in }
@@ -54,7 +55,8 @@ public extension RESTAPI {
 		await resource(
 			path: path,
 			method: "PUT",
-			parameters: parameters
+			parameters: parameters,
+			body: payload.data(using: encoder)
 		)
 	}
 
