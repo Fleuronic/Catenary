@@ -39,7 +39,7 @@ public extension RESTAPI {
 		)
 	}
 
-	func put(at path: String, using payload: some Payload = EmptyPayload(), with parameters: some Parameters = EmptyParameters()) async -> Result<Void> {
+	func put(_ payload: some Payload = EmptyPayload(), at path: String, with parameters: some Parameters = EmptyParameters()) async -> Result<Void> {
 		// TODO
 		let result: Result<EmptyResource> = await resource(
 			path: path,
@@ -51,7 +51,7 @@ public extension RESTAPI {
 		return result.map { _ in }
 	}
 
-	func put<Resource: Decodable>(at path: String, using payload: some Payload = EmptyPayload(), with parameters: some Parameters = EmptyParameters()) async -> Result<Resource> {
+	func put<Resource: Decodable>(_ payload: some Payload = EmptyPayload(), at path: String, with parameters: some Parameters = EmptyParameters()) async -> Result<Resource> {
 		await resource(
 			path: path,
 			method: "PUT",
