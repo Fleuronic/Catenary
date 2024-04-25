@@ -1,7 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Schemata
-import PersistDB
+import enum Catena.GraphQL
+import struct PersistDB.ValueSet
+import struct PersistDB.Predicate
+import protocol Schemata.Model
 
 public extension GraphQL.Query {
 	enum Mutation {

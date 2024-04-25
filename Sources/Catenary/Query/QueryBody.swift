@@ -1,5 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import enum Catena.GraphQL
+
 extension GraphQL.Query {
 	struct Body {
 		let queryString: String

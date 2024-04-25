@@ -1,5 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import enum Catena.GraphQL
+
 public extension GraphQL.Query {
 	enum Scope {
 		case single
