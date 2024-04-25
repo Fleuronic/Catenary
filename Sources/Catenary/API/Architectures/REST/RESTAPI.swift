@@ -6,11 +6,22 @@ import struct Foundation.URLRequest
 import struct Foundation.URLComponents
 import class Foundation.URLSession
 import class Foundation.NSError
+import class Foundation.HTTPURLResponse
 
 public protocol RESTAPI: API {}
 
 // MARK: -
 public extension RESTAPI {
+	func getResource(at path: String, with parameters: some Parameters = EmptyParameters()) async -> Result<Void> {
+		let result: Result<EmptyResource> = await resource(
+			path: path,
+			method: "GET",
+			parameters: parameters
+		)
+
+		return result.map { _ in }
+	}
+
 	func getResource<Resource: Decodable>(at path: String, with parameters: some Parameters = EmptyParameters()) async -> Result<Resource> {
 		await resource(
 			path: path,
@@ -74,8 +85,14 @@ public extension RESTAPI {
 
 // MARK: -
 extension RESTAPI {
-	func resource<Resource: Decodable>(from data: Data) throws -> Resource {
-		try data as? Resource ?? decoder.decode(Response.self, from: data).resource()
+	func resource<Resource: Decodable>(
+		data: Data,
+		response: HTTPURLResponse?
+	) throws -> Resource {
+		try
+			response?.url as? Resource ??
+			data as? Resource ??
+			decoder.decode(Response.self, from: data).resource()
 	}
 }
 
@@ -109,8 +126,13 @@ private extension RESTAPI {
 				urlRequest.apply(.jsonContentType)
 			}
 
-			let (data, _) = try await URLSession.shared.data(for: urlRequest)
-			return try .success(resource(from: data))
+			let (data, urlResponse) = try await URLSession.shared.data(for: urlRequest)
+			return try .success(
+				resource(
+					data: data,
+					response: urlResponse as? HTTPURLResponse
+				)
+			)
 		} catch let error as Error {
 			return .failure(.api(error))
 		} catch let error as DecodingError {

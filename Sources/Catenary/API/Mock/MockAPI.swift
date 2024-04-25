@@ -28,7 +28,12 @@ extension RESTAPI {
 
 		if let jsonObject = mockAPI.mockJSONObject(path: path, method: method) {
 			let data = try JSONSerialization.data(withJSONObject: jsonObject, options: .fragmentsAllowed)
-			return try .success(resource(from: data))
+			return try .success(
+				resource(
+					data: data,
+					response: nil
+				)
+			)
 		}
 
 		return mockAPI.mockResource(path: path, method: method)
