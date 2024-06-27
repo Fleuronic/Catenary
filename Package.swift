@@ -18,18 +18,12 @@ let package = Package(
 		)
 	],
 	dependencies: [
-		.package(url: "https://github.com/Fleuronic/Catena", branch: "main"),
-		.package(url: "https://github.com/Fleuronic/Schemata", branch: "master"),
-		.package(url: "https://github.com/Fleuronic/PersistDB", branch: "master")
+		.package(path: "../..")
 	],
 	targets: [
 		.target(
 			name: "Catenary",
-			dependencies: [
-				"Catena",
-				"Schemata",
-				"PersistDB"
-			]
+			dependencies: ["Catena"]
 		)
 	]
 )
