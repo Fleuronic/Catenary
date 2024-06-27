@@ -1,4 +1,5 @@
 {
+  "originHash" : "e491c37fe91b6b05d55170f07e85b9417f2bc8baef7ff352541ac4848d4a7249",
   "pins" : [
     {
       "identity" : "catena",
@@ -6,70 +7,25 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "19df2fa51d10b264bd538f581832cb3226f0d75e"
-      }
-    },
-    {
-      "identity" : "dictionarycoder",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/almazrafi/DictionaryCoder.git",
-      "state" : {
-        "revision" : "ebcbaeb20ca5f62ed0365fa7f0473e0d480b931e",
-        "version" : "1.2.0"
-      }
-    },
-    {
-      "identity" : "differ",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/tonyarnold/Differ.git",
-      "state" : {
-        "revision" : "5520fda947f1f9777a806389c2ba587219bc0538",
-        "version" : "1.4.6"
+        "revision" : "da49cee4834729afdacd00ab4b6f77454391b096"
       }
     },
     {
       "identity" : "identity",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/Identity",
+      "location" : "https://github.com/Fleuronic/Identity",
       "state" : {
-        "revision" : "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
-        "version" : "0.3.0"
+        "branch" : "master",
+        "revision" : "3dedc8db072d496a3b234fb0c452b97b987bf4c2"
       }
     },
     {
       "identity" : "initmacro",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/LeonardoCardoso/InitMacro.git",
+      "location" : "https://github.com/Fleuronic/InitMacro.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "41beaa5cc3f8884385df6d0acf49f79821ab2496"
-      }
-    },
-    {
-      "identity" : "persistdb",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/PersistDB",
-      "state" : {
-        "branch" : "master",
-        "revision" : "fd3eec2673993bee5682d5fade7b2a2654dff4cb"
-      }
-    },
-    {
-      "identity" : "reactiveswift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
-      "state" : {
-        "branch" : "swift-concurrency",
-        "revision" : "3d40187c982346352d0adbe6b38e0e3d53fddc95"
-      }
-    },
-    {
-      "identity" : "schemata",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Schemata",
-      "state" : {
-        "branch" : "master",
-        "revision" : "0f0669c9f8bab8769c2710f5d3a91de95a2533d6"
+        "branch" : "update-swift-syntax",
+        "revision" : "d7010e57d835c41bd75fcb6a7553f3faad9384f0"
       }
     },
     {
@@ -77,10 +33,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax",
       "state" : {
-        "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
-        "version" : "509.0.0"
+        "revision" : "08a2f0a9a30e0f705f79c9cfaca1f68b71bdc775",
+        "version" : "510.0.0"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
