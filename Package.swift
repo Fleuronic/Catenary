@@ -1,4 +1,4 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.0
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import PackageDescription
@@ -25,5 +25,6 @@ let package = Package(
 			name: "Catenary",
 			dependencies: ["Catena"]
 		)
-	]
+	],
+	swiftLanguageVersions: [.v6]
 )
