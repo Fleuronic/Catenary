@@ -24,7 +24,7 @@ public extension Error {
 	}
 }
 
-extension DecodingError: @retroactive Equatable {
+extension DecodingError: Equatable {
 	public static func ==(lhs: Self, rhs: Self) -> Bool {
 		lhs.errorDescription == rhs.errorDescription
 	}
