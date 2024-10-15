@@ -1,6 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import class Foundation.NSError
+public import class Foundation.NSError
 
 public enum Error<Error: Swift.Error & Equatable & CustomStringConvertible>: Swift.Error & Equatable {
 	case api(Error)
@@ -11,7 +11,7 @@ public enum Error<Error: Swift.Error & Equatable & CustomStringConvertible>: Swi
 
 // MARK: -
 public extension Error {
-	init(_ error: Swift.Error) {
+	init(_ error: some Swift.Error) {
 		if let error = error as? Self {
 			self = error
 		} else if let error = error as? Error {
@@ -24,7 +24,7 @@ public extension Error {
 	}
 }
 
-extension DecodingError: Equatable {
+extension DecodingError: Swift.Equatable {
 	public static func ==(lhs: Self, rhs: Self) -> Bool {
 		lhs.errorDescription == rhs.errorDescription
 	}
