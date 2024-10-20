@@ -1,5 +1,4 @@
 {
-  "originHash" : "e491c37fe91b6b05d55170f07e85b9417f2bc8baef7ff352541ac4848d4a7249",
   "pins" : [
     {
       "identity" : "catena",
@@ -7,7 +6,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "e01565976a800ef370751b685d4e06a637b352f3"
+        "revision" : "87a997b755ec07aa60603c6b3a14ba4893591f9e"
       }
     },
     {
@@ -16,27 +15,9 @@
       "location" : "https://github.com/Fleuronic/Identity",
       "state" : {
         "branch" : "master",
-        "revision" : "152f96ff2f828c56363d7ab089b81c80b6cbf1ca"
-      }
-    },
-    {
-      "identity" : "initmacro",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/InitMacro.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "323cda3658117d4c58d597908365ab5dcb939d2e"
-      }
-    },
-    {
-      "identity" : "swift-syntax",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax",
-      "state" : {
-        "revision" : "08a2f0a9a30e0f705f79c9cfaca1f68b71bdc775",
-        "version" : "510.0.0"
+        "revision" : "511c8584d7c0bed3da607156a4d643fd44ca4368"
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

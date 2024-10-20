@@ -1,6 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+#if swift(<5.9)
+import class Foundation.NSError
+#else
 public import class Foundation.NSError
+#endif
 
 public enum Error<Error: Swift.Error & Equatable & CustomStringConvertible>: Swift.Error & Equatable {
 	case api(Error)
@@ -33,10 +37,10 @@ extension DecodingError: Swift.Equatable {
 extension Error: CustomStringConvertible {
 	public var description: String {
 		switch self {
-		case let .api(error): error.description
-		case let .undocumented(message): message 
-		case let .decoding(error): "\(error)"
-		case let .network(error): error.localizedDescription
+		case let .api(error): return error.description
+		case let .undocumented(message): return message
+		case let .decoding(error): return "\(error)"
+		case let .network(error): return error.localizedDescription
 		}
 	}
 }
