@@ -18,7 +18,7 @@ let package = Package(
 		)
 	],
 	dependencies: [
-        .package(url: "https://github.com/Fleuronic/Catena", branch: "main")
+		.package(url: "https://github.com/Fleuronic/Catena", branch: "main")
 	],
 	targets: [
 		.target(
@@ -31,6 +31,5 @@ let package = Package(
 for target in package.targets {
 	target.swiftSettings = [
 		.enableUpcomingFeature("StrictConcurrency"),
-		.enableExperimentalFeature("AccessLevelOnImport")
 	]
 }

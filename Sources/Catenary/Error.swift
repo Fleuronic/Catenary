@@ -1,10 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-#if swift(<5.9)
 import class Foundation.NSError
-#else
-public import class Foundation.NSError
-#endif
 
 public enum Error<Error: Swift.Error & Equatable & CustomStringConvertible>: Swift.Error & Equatable {
 	case api(Error)
