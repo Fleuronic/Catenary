@@ -8,7 +8,7 @@ public protocol API: Sendable {
 public extension API {
 	typealias Response<Resource> = Result<Resource, Catenary.Error<Error>>
 
-	func result<Resource>(request: @escaping () async throws -> Resource) async -> Response<Resource> {
+	func response<Resource>(request: @escaping () async throws -> Resource) async -> Response<Resource> {
 		do {
 			let resource = try await request()
 			return .success(resource)
