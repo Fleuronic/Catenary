@@ -2,7 +2,7 @@
 
 import class Foundation.NSError
 
-public enum Error<Error: Swift.Error & Equatable & CustomStringConvertible>: Swift.Error & Equatable {
+public enum Error<Error: Swift.Error & Equatable & CustomStringConvertible>: ResourceError {
 	case api(Error)
 	case undocumented(message: String)
 	case decoding(DecodingError)
@@ -24,12 +24,14 @@ public extension Error {
 	}
 }
 
+// MARK: -
 extension DecodingError: Swift.Equatable {
 	public static func ==(lhs: Self, rhs: Self) -> Bool {
 		lhs.errorDescription == rhs.errorDescription
 	}
 }
 
+// MARK: -
 extension Error: CustomStringConvertible {
 	public var description: String {
 		switch self {
@@ -40,3 +42,6 @@ extension Error: CustomStringConvertible {
 		}
 	}
 }
+
+// MARK: -
+public protocol ResourceError: Swift.Error & Equatable {}

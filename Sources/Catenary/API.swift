@@ -6,14 +6,23 @@ public protocol API: Sendable {
 
 // MARK: -
 public extension API {
-	typealias Result<Resource> = Swift.Result<Resource, Catenary.Error<Error>>
+	typealias Response<Resource> = Result<Resource, Catenary.Error<Error>>
 
-	func result<Response>(request: @escaping () async throws -> Response) async -> Result<Response> {
+	func result<Resource>(request: @escaping () async throws -> Resource) async -> Response<Resource> {
 		do {
-			let response = try await request()
-			return .success(response)
+			let resource = try await request()
+			return .success(resource)
 		} catch {
 			return .failure(.init(error))
+		}
+	}
+}
+
+// MARK: -
+public extension Result where Failure: ResourceError {
+	var resource: Success {
+		get throws(Failure) {
+			try get()
 		}
 	}
 }
