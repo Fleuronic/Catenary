@@ -8,5 +8,10 @@ public protocol Fields: Catena.Fields  {
 
 // MARK: -
 public extension Fields {
+	var missingFields: [PartialKeyPath<Self>] {
+		undocumentedFields.filter(\.value).map(\.key)
+	}
+
+	// MARK: Fields
 	var undocumentedFields: [PartialKeyPath<Self>: Bool] { [:] }
 }
