@@ -1,5 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-public protocol API: Sendable {
-	associatedtype Error: Swift.Error & Equatable
+import protocol Catena.ResultProviding
+
+public protocol API: ResultProviding, Sendable where Error == Catenary.Error<APIError> {
+	associatedtype APIError: Swift.Error, Equatable
 }
