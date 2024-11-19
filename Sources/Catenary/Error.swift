@@ -22,6 +22,8 @@ public extension Error {
 			self = .network(error as NSError)
 		}
 	}
+
+	static func type(_: Never) -> Self {}
 }
 
 // MARK: -

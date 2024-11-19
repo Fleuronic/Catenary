@@ -1,6 +1,5 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Catena.IDFields
 import protocol Catena.Fields
 
 public protocol Fields: Catena.Fields  {
@@ -16,6 +15,3 @@ public extension Fields {
 	// MARK: Fields
 	var undocumentedFields: [PartialKeyPath<Self>: Bool] { [:] }
 }
-
-// MARK: -
-extension IDFields: Fields {}
