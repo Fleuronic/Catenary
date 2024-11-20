@@ -2,4 +2,4 @@
 
 import protocol Catena.Representable
 
-public protocol Details: Representable, Fields {}
+public protocol Details: Fields, Representable {}
