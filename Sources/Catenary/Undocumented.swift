@@ -5,6 +5,7 @@ public enum Undocumented<Field: Sendable>: Sendable {
 	case missing
 }
 
+// MARK: -
 public extension Undocumented {
 	var precheckedValue: Field {
 		switch self {
@@ -21,6 +22,7 @@ public extension Undocumented {
 	}
 }
 
+// MARK: -
 public extension Optional where Wrapped: Sendable {
 	var undocumented: Undocumented<Wrapped> {
 		map(Undocumented.present) ?? .missing

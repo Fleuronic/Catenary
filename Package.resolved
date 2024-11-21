@@ -1,5 +1,4 @@
 {
-  "originHash" : "9a8a508195937733612d6be61582c90d2414d0a227426960d283d35bd4ba256f",
   "pins" : [
     {
       "identity" : "catena",
@@ -7,7 +6,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "82859aae045a5177def6d9e18b1f62b556f3614c"
+        "revision" : "ea5588aa4f8ceb04c5b95c2aea0aaacedc9a6e39"
       }
     },
     {
@@ -20,5 +19,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

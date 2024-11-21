@@ -2,17 +2,6 @@
 
 import protocol Catena.ResultProviding
 
-public extension API {
-	func result<Resource>(request: @escaping () async throws -> Resource) async -> SingleResult<Resource> {
-		do {
-			let resource = try await request()
-			return .success(resource)
-		} catch {
-			return .failure(.init(error))
-		}
-	}
-}
-
 public extension Result where Failure: ResourceError {
 	#if swift(>=6.0)
 	var resource: Success {
@@ -35,4 +24,16 @@ public extension Result where Failure: ResourceError {
 		_ = try get()
 	}
 	#endif
+}
+
+// MARK: -
+public extension API {
+	func result<Resource>(request: @escaping () async throws -> Resource) async -> SingleResult<Resource> {
+		do {
+			let resource = try await request()
+			return .success(resource)
+		} catch {
+			return .failure(.init(error))
+		}
+	}
 }
