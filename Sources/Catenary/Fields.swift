@@ -4,6 +4,8 @@ import protocol Catena.Fields
 
 public protocol Fields: Catena.Fields, Decodable  {
 	var undocumentedFields: [PartialKeyPath<Self>: Bool] { get }
+
+	init(from decoder: any Decoder) throws
 }
 
 // MARK: -
