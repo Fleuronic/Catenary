@@ -1,8 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Identity.Identifier
-import protocol Identity.Identifiable
 import protocol Catena.Identifying
+import protocol Identity.Identifiable
 
 public extension Identifiable {
 	typealias PendingID = PendingIdentifier<Self>
