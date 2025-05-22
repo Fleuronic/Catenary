@@ -8,6 +8,6 @@ public extension Identifiable {
 }
 
 // MARK: -
-public enum PendingIdentifier<T: Identifiable>: Identifying, Sendable {
+public enum PendingIdentifier<Identified: Identifiable>: Identifying, Sendable {
 	case fromServer
 }

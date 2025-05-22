@@ -37,10 +37,10 @@ extension DecodingError: Swift.Equatable {
 extension Error: CustomStringConvertible {
 	public var description: String {
 		switch self {
-		case let .api(error): return "\(error)"
-		case let .undocumented(message): return message
-		case let .decoding(error): return "\(error)"
-		case let .network(error): return error.localizedDescription
+		case let .api(error): "\(error)"
+		case let .undocumented(message): message
+		case let .decoding(error): "\(error)"
+		case let .network(error): error.localizedDescription
 		}
 	}
 }
