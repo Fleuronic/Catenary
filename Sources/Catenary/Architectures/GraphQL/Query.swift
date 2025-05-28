@@ -10,11 +10,13 @@ public struct Query {
 public extension Query {
 	init(
 		name: String,
-		fieldNames: [String]
+		fieldNames: [String],
+		paths: [[String]] = []
 	) {
 		body = Weave(.query) {
 			Object(name) {
 				ForEachWeavable(fieldNames, content: Field.init)
+				ForEachWeavable(paths, content: \.content)
 			}
 		}.description
 	}
@@ -26,5 +28,16 @@ extension Query: Encodable {
 	public func encode(to encoder: any Encoder) throws {
 		var container = encoder.singleValueContainer()
 		try container.encode(body)
+	}
+}
+
+// MARK:
+private extension [String] {
+	var content: any ObjectWeavable {
+		let head = self[0]
+		let tail = Array(self[1...])
+		return (count == 1) ? Field(head) : Object(head) {
+			tail.content
+		}
 	}
 }
