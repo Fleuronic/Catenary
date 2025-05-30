@@ -10,12 +10,10 @@ public struct Query {
 public extension Query {
 	init(
 		name: String,
-		fieldNames: [String],
-		paths: [[String]] = []
+		paths: [[String]]
 	) {
 		body = Weave(.query) {
 			Object(name) {
-				ForEachWeavable(fieldNames, content: Field.init)
 				ForEachWeavable(paths, content: \.content)
 			}
 		}.description
