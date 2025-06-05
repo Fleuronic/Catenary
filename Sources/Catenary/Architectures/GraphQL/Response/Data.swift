@@ -11,6 +11,13 @@ extension Response.Data: Decodable {
 	init(from decoder: any Decoder) throws {
 		let container = try decoder.container(keyedBy: Key.self)
 		let key = container.allKeys.first!
-		fields = try container.decode([Fields].self, forKey: key)
+
+		do {
+			fields = try container.decode(for: key)
+		} catch {
+			let nestedContainer = try container.nestedContainer(keyedBy: Key.self, forKey: key)
+			let nestedKey = nestedContainer.allKeys.first!
+			fields = try nestedContainer.decode(for: nestedKey)
+		}
 	}
 }
