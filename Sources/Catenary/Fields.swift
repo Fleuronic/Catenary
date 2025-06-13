@@ -2,7 +2,7 @@
 
 import protocol Catena.Fields
 
-public protocol Fields: Catena.Fields, Decodable  {
+public protocol Fields<Model>: Catena.Fields, Decodable  {
 	var undocumentedFields: [PartialKeyPath<Self>: Bool] { get }
 
 	static func decoded(from decoder: any Decoder) throws -> Self
