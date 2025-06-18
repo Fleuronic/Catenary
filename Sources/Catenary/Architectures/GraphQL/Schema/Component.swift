@@ -2,8 +2,8 @@
 
 public extension Schema {
 	struct Component: Hashable {
-		public let keyPath: AnyKeyPath
-		public let pathComponents: [String]
+		let keyPath: AnyKeyPath
+		let pathComponents: [String]
 
 		public init(
 			keyPath: AnyKeyPath,

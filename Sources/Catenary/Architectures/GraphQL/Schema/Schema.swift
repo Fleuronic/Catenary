@@ -2,8 +2,11 @@
 
 public struct Schema {
 	private let body: [AnyKeyPath: [String]]
+}
 
-	public init(
+// MARK: -
+public extension Schema {
+	init(
 		components: Set<Component>,
 		maxDepth: Int = 2
 	) {
@@ -40,10 +43,7 @@ public struct Schema {
 
 		self.body = body
 	}
-}
 
-// MARK: -
-public extension Schema {
 	subscript (keyPath: AnyKeyPath) -> [String] {
 		body[keyPath]!
 	}
