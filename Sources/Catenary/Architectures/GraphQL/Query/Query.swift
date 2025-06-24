@@ -2,7 +2,7 @@
 
 import SociableWeaver
 
-public struct Query {
+public struct Query<Schematic: Catenary.Schematic> {
 	private let body: String
 }
 
@@ -12,11 +12,12 @@ public extension Query {
 		name: String,
 		type: OperationType = .query,
 		argumentList: ArgumentList? = nil,
-		fields: [[String]],
+		keyPaths: Set<AnyKeyPath>,
 		fieldsName: String? = nil,
 		slice: (amount: Int, offset: Int)? = nil
 	) {
-		let fields: any ObjectWeavable = ForEachWeavable(fields, content: \.content)
+		let schema = Schematic.schema
+		let fields: any ObjectWeavable = ForEachWeavable(keyPaths.map { schema[$0] }, content: \.content)
 		var object = Object(name) {
 			fieldsName.map {
 				Object($0) { fields }
@@ -33,7 +34,14 @@ public extension Query {
 		}
 
 		object = slice.map(object.slice) ?? object
-		body = Weave(type) { object }.description
+
+		var body = Weave(type) { object }.description
+		for value in Schematic.enumValues {
+			body = body.replacingOccurrences(of: "\"\(value)\"", with: value)
+		}
+
+		self.body = body
+		print(body)
 	}
 }
 
