@@ -41,7 +41,6 @@ public extension Query {
 		}
 
 		self.body = body
-		print(body)
 	}
 }
 

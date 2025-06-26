@@ -1,5 +1,5 @@
 {
-  "originHash" : "9a8a508195937733612d6be61582c90d2414d0a227426960d283d35bd4ba256f",
+  "originHash" : "277b26efa7d2c899085182155a2ea20d069e4d8a0055d4dd88d4e9163eaac752",
   "pins" : [
     {
       "identity" : "catena",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "1fe811c19f7ff6ee263b8f5f735e72b5828689a4"
+        "revision" : "681be25be987a63d858c6c952d239ed85a5c1b43"
       }
     },
     {
@@ -17,6 +17,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "8764a54c8e5ef0d14f3dc2ec5c10223ed0411a4d"
+      }
+    },
+    {
+      "identity" : "sociableweaver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/NicholasBellucci/SociableWeaver.git",
+      "state" : {
+        "revision" : "dd8368fcf1f8fef5d672ea64775dc6f7b02d7a92",
+        "version" : "0.1.12"
       }
     }
   ],

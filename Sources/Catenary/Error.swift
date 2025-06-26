@@ -1,6 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import class Foundation.NSError
+import Foundation
 
 public enum Error<Error: Swift.Error & Equatable>: ResourceError {
 	case api(Error)
@@ -28,7 +28,7 @@ public extension Error {
 
 // MARK: -
 extension DecodingError: Swift.Equatable {
-	public static func ==(lhs: Self, rhs: Self) -> Bool {
+	public static func == (lhs: Self, rhs: Self) -> Bool {
 		lhs.errorDescription == rhs.errorDescription
 	}
 }

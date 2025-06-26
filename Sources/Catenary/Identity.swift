@@ -1,8 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import Identity
 import SociableWeaver
-import struct Identity.Identifier
-import protocol Identity.Identifiable
 import protocol Catena.Identifying
 
 public extension Identifiable {
