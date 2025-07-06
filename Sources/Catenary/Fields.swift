@@ -22,14 +22,3 @@ public extension Fields {
 	// MARK: Fields
 	var undocumentedFields: [PartialKeyPath<Self>: Bool] { [:] }
 }
-
-// MARK: -
-public extension KeyedDecodingContainer {
-	func decode<T: Decodable>(for key: K) throws -> T {
-		try decode(T.self, forKey: key)
-	}
-
-	func decodeIfPresent<T: Decodable>(for key: K) throws -> T? {
-		try decodeIfPresent(T.self, forKey: key)
-	}
-}
